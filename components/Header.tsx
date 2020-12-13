@@ -5,7 +5,7 @@ import LoadingBar from "react-redux-loading-bar";
 import Logo from "./micro-components/Logo";
 import Menu, { MenuItem } from "./Menu";
 
-export default function Header({ menu }: { menu: [MenuItem] }) {
+export default function Header({ menu = [] }: { menu?: [MenuItem] | [] }) {
 	const [menuOpen, _toggleMenu] = useState(false);
 	const toggleMenu = () => _toggleMenu(!menuOpen);
 

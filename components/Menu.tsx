@@ -16,7 +16,7 @@ export interface MenuItem {
 }
 
 interface MenuProps {
-	menu: [MenuItem];
+	menu: [MenuItem] | [];
 	mobile: boolean;
 	show: boolean;
 	toggleMenu: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
@@ -25,7 +25,7 @@ interface MenuProps {
 export default function Menu({ menu, mobile, show, toggleMenu }: MenuProps) {
 	const menuItems = (
 		<React.Fragment>
-			{menu.map((menuItem) => (
+			{(menu as [MenuItem]).map((menuItem) => (
 				<tr key={menuItem.ID}>
 					<td style={styles}>
 						<Link href={menuItem.url}>

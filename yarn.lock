@@ -1197,6 +1197,11 @@ concat-stream@^1.5.0:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
+connected-next-router@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/connected-next-router/-/connected-next-router-4.0.1.tgz#50f9a2a1763cb2e19864e3b92a491cf98ced94fd"
+  integrity sha512-Jggb3edu2rijGvYnYO+agiyggpoTFlmgL6Hp9OLEGT7OYWGtnGrHR+c13TYG9eARHpo7FLoRDcCdhtdEhMeSog==
+
 console-browserify@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.2.0.tgz#67063cef57ceb6cf4993a2ab3a55840ae8c49336"
@@ -3424,6 +3429,19 @@ react-lazy-load-image-component@^1.5.1:
   dependencies:
     lodash.debounce "^4.0.8"
     lodash.throttle "^4.1.1"
+
+react-lifecycles-compat@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+  integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-redux-loading-bar@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-redux-loading-bar/-/react-redux-loading-bar-5.0.0.tgz#fffbc2b893c556b7b4c577743427507ee6dbc1f3"
+  integrity sha512-orxhhnuTDHUJ8sWBf7NHc9iIvPx8+8LVmMmC9ka3UcXKbMRaPdaYfH2wCikOwVV6gxhRceFA/zaSLSdnGrF41Q==
+  dependencies:
+    prop-types "^15.7.2"
+    react-lifecycles-compat "^3.0.4"
 
 react-redux@^7.2.2:
   version "7.2.2"
