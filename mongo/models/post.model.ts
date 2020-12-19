@@ -1,4 +1,27 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
+
+export interface PostType {
+	title: string;
+	slug: string;
+	content: string;
+	date_created: Date;
+	date_modified: Date;
+	excerpt: string;
+	author: Schema.Types.ObjectId;
+	categories: Schema.Types.ObjectId;
+	tags: [string];
+	comments: Schema.Types.ObjectId;
+	featuredImage: {
+		type: {
+			url: String;
+			altText: String;
+		};
+	};
+	status: "published" | "draft" | "trashed";
+	type: "post" | "page";
+}
+
+interface _Post extends PostType, Document {}
 
 const postSchema = new Schema({
 	title: {
@@ -38,4 +61,4 @@ const postSchema = new Schema({
 	},
 });
 
-export default model("Post", postSchema);
+export default model<_Post>("Post", postSchema);

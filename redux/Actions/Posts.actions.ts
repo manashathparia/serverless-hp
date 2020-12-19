@@ -4,6 +4,7 @@ import { showLoading, hideLoading } from "react-redux-loading-bar";
 import axios from "axios";
 // import { sortComments } from '../utils/wordpress';
 import { addNotification } from "./notification.actions";
+import { PostType } from "../../mongo/models/post.model";
 // import config from '../../config.json';
 
 export const UPDATE_POST = "UPDATE_POST";
@@ -12,7 +13,7 @@ export const UPDATE_FETCHED_POSTS = "UPDATE_FETCHED_POSTS";
 export const UPDATE_TOTAL_POSTS = "UPDATE_TOTAL_POSTS";
 export const UPDATE_DISPLAY_POSITION = "UPDATE_DISPLAY_POSITION";
 
-export const getAllPostsAction = (_posts: any) => {
+export const getAllPostsAction = (_posts: [PostType]) => {
 	// const posts = _posts?.map((post) => ({
 	//     ...post,
 	//     title: post?.title.rendered,
@@ -24,7 +25,7 @@ export const getAllPostsAction = (_posts: any) => {
 	// };
 };
 
-export const getWpPostAction = (_post: any) => {
+export const getWpPostAction = (_post: PostType) => {
 	// const post = {
 	//     ..._post,
 	//     title: _post.title.rendered,

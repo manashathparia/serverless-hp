@@ -15,7 +15,7 @@ export default function Header({ menu = [] }: { menu?: [MenuItem] | [] }) {
 			<div style={{ margin: "auto" }} className="navbar-brand">
 				<Link
 					// style={{ zIndex: 99 }}
-					href="/"
+					href="/jjj"
 				>
 					<span className={`navbar-item logo`}>
 						<Logo />
