@@ -2,6 +2,7 @@ import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import Router from "next/router";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { createStore, applyMiddleware, combineReducers } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import {
 	createRouterMiddleware,
 	initialRouterState,
@@ -56,6 +57,8 @@ const reducer = (state: any, action: any) => {
 	}
 };
 
+const devTools = process.env.NODE_ENV === "development";
+
 export const initStore = (context: any) => {
 	const routerMiddleware = createRouterMiddleware();
 	const { asPath } = context.ctx || Router.router || {};
@@ -65,7 +68,13 @@ export const initStore = (context: any) => {
 			router: initialRouterState(asPath),
 		};
 	}
-	return createStore(reducer, initialState, applyMiddleware(routerMiddleware));
+	return createStore(
+		reducer,
+		initialState,
+		devTools
+			? composeWithDevTools(applyMiddleware(routerMiddleware))
+			: applyMiddleware(routerMiddleware)
+	);
 };
 
 export const wrapper = createWrapper(initStore);

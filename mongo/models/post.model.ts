@@ -12,10 +12,9 @@ export interface PostType {
 	tags: [string];
 	comments: Schema.Types.ObjectId;
 	featuredImage: {
-		type: {
-			url: String;
-			altText: String;
-		};
+		medium: string;
+		large: string;
+		altText: string;
 	};
 	status: "published" | "draft" | "trashed";
 	type: "post" | "page";
@@ -44,7 +43,8 @@ const postSchema = new Schema({
 	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 	featuredImage: {
 		type: {
-			url: String,
+			medium: String,
+			large: String,
 			altText: String,
 		},
 	},
