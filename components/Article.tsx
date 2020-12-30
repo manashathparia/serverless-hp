@@ -3,6 +3,7 @@ import styled from "styled-components";
 import catchLinks from "catch-links";
 import HtmlToReact from "html-to-react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useRouter } from "next/router";
 import Ad from "./Ad";
 
 const htmlToReactParser = new HtmlToReact.Parser();
@@ -12,21 +13,19 @@ export default function Article({
 	date,
 	featuredImage,
 	title,
-	push,
 }: {
 	article: string;
 	date: string;
 	featuredImage: string;
 	title: string;
-	push: Function;
 }) {
 	const articleRef = useRef(null);
-
+	const router = useRouter();
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		if (article) {
 			catchLinks(articleRef.current, (href: string) => {
-				push(href);
+				router.push(href);
 			});
 		}
 	}, [article]);
