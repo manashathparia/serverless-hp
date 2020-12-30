@@ -16,10 +16,10 @@ export interface MenuItem {
 }
 
 interface MenuProps {
-	menu: [MenuItem] | [];
-	mobile: boolean;
-	show: boolean;
-	toggleMenu: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
+	menu: [MenuItem];
+	mobile?: boolean;
+	show?: boolean;
+	toggleMenu?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
 export default function Menu({ menu, mobile, show, toggleMenu }: MenuProps) {

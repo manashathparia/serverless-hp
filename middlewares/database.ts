@@ -3,6 +3,7 @@ import nextConnect from "next-connect";
 import dbConnect from "../mongo";
 
 async function database(req: any, _res: any, next: any) {
+	console.log("OKKKK");
 	await dbConnect();
 	req.db = mongoose;
 	return next();

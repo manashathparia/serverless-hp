@@ -6,8 +6,8 @@ import {
 	UPDATE_DISPLAY_POSITION,
 } from "../Actions/Posts.actions";
 
-const initial = {
-	all_posts: [{}],
+const initial: any = {
+	all_posts: [],
 	current_post: {},
 	fetched_posts: {},
 	total_posts: 0,

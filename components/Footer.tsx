@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 // import config from '../../config.json';
 
-export default function Footer({ menu = [] }: { menu: [any] | [] }) {
+export default function Footer({ menu = [] }: { menu?: [any] | [] }) {
 	return (
 		<Root>
 			Copyright © 2020 {/* {config.title} */} -{" "}

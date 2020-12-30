@@ -8,6 +8,7 @@ import {
 	initialRouterState,
 	routerReducer,
 } from "connected-next-router";
+import reduxThunk from "redux-thunk";
 import posts from "./post";
 import menu from "./menu";
 import preferences from "./preferencesReducer";
@@ -72,8 +73,8 @@ export const initStore = (context: any) => {
 		reducer,
 		initialState,
 		devTools
-			? composeWithDevTools(applyMiddleware(routerMiddleware))
-			: applyMiddleware(routerMiddleware)
+			? composeWithDevTools(applyMiddleware(reduxThunk, routerMiddleware))
+			: applyMiddleware(reduxThunk, routerMiddleware)
 	);
 };
 

@@ -4,7 +4,15 @@ import Link from "next/link";
 
 const columnStyle = { paddingBottom: 0 };
 
-export default function Card(props: any) {
+interface CardProps {
+	slug: string;
+	title: string;
+	modified: string;
+	featuredImage: string;
+	excerpt: string;
+}
+
+export default function Card(props: CardProps) {
 	return (
 		<Root>
 			<div
@@ -57,7 +65,9 @@ export default function Card(props: any) {
 							/>
 							<span className="read-more">
 								<Link href={`/${props.slug}`}>
-									Read more <span style={{ color: "sky blue" }}>→</span>
+									<span style={{ cursor: "pointer" }}>
+										Read more <span style={{ color: "sky blue" }}>→</span>
+									</span>
 								</Link>
 							</span>
 						</Excerpt>
@@ -81,7 +91,6 @@ const Root = styled.div`
 
 const Excerpt = styled.div`
 	width: 100%;
-
 	padding-bottom: 10px;
 	font-size: 18px;
 	line-height: 1.7;
@@ -96,5 +105,6 @@ const Heading = styled.h2`
 	font-size: 30px !important;
 	text-decoration: none;
 	font-weight: 700;
+	cursor: pointer;
 	line-height: 1.2;
 `;

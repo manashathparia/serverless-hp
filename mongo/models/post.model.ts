@@ -1,4 +1,5 @@
 import { Schema, model, Document } from "mongoose";
+import { modelAreadyDeclared } from "..";
 
 export interface PostType {
 	title: string;
@@ -61,4 +62,8 @@ const postSchema = new Schema({
 	},
 });
 
-export default model<_Post>("Post", postSchema);
+export default (function () {
+	if (!modelAreadyDeclared("Post")) {
+		return model<_Post>("Post", postSchema);
+	}
+})();

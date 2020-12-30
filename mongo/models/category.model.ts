@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { modelAreadyDeclared } from "..";
 
 const categorySchema = new Schema({
 	category: {
@@ -8,4 +9,8 @@ const categorySchema = new Schema({
 	},
 });
 
-export default model("Category", categorySchema);
+export default (function () {
+	if (!modelAreadyDeclared("Category")) {
+		return model("Category", categorySchema);
+	}
+})();

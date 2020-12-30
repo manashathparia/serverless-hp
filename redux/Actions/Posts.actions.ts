@@ -13,16 +13,16 @@ export const UPDATE_FETCHED_POSTS = "UPDATE_FETCHED_POSTS";
 export const UPDATE_TOTAL_POSTS = "UPDATE_TOTAL_POSTS";
 export const UPDATE_DISPLAY_POSITION = "UPDATE_DISPLAY_POSITION";
 
-export const getAllPostsAction = (_posts: [PostType]) => {
-	// const posts = _posts?.map((post) => ({
-	//     ...post,
-	//     title: post?.title.rendered,
-	//     modified: new Date(post?.modified).toDateString(),
-	// }));
-	// return {
-	//     type: UPDATE_ALL_POSTS,
-	//     payload: posts,
-	// };
+export const getAllPostsAction = (_posts: [any]) => {
+	const posts = _posts?.map((post) => ({
+		...post,
+		title: post?.title,
+		modified: new Date(post?.modified).toDateString(),
+	}));
+	return {
+		type: UPDATE_ALL_POSTS,
+		payload: posts,
+	};
 };
 
 export const getWpPostAction = (_post: PostType) => {
@@ -59,21 +59,22 @@ export const clearCurrentPost = () => ({
 	payload: {},
 });
 
-export const getWpAllPosts = (pageNo: number) => async (dispatch: Function) => {
+export const getWpAllPosts = (_pageNo: number) => async (
+	dispatch: Function
+) => {
 	try {
 		dispatch(showLoading());
-		const _posts = await axios.get(
-			`/posts/?page=${pageNo}&_fields=id,excerpt,title,link,slug,featured_images,modified`
-		);
+		const _posts = await axios.get(`/api/posts`);
 		dispatch(hideLoading());
+		console.log(_posts);
 		dispatch(getAllPostsAction(_posts.data));
 
-		dispatch(
-			updateTotalPageAction(
-				_posts.headers["x-wp-total"],
-				_posts.headers["x-wp-totalpages"]
-			)
-		);
+		// dispatch(
+		// 	updateTotalPageAction(
+		// 		_posts.headers["x-wp-total"],
+		// 		_posts.headers["x-wp-totalpages"]
+		// 	)
+		// );
 	} catch (e) {
 		dispatch(hideLoading());
 		dispatch(

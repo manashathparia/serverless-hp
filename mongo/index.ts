@@ -4,10 +4,19 @@ import mongoose from "mongoose";
 import "./models/post.model";
 import "./models/category.model";
 
+export function modelAreadyDeclared(model: string) {
+	try {
+		mongoose.model(model); // it throws an error if the model is still not defined
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
+
 const connect = async () => {
 	if (!(mongoose.connection.readyState === 1)) {
 		await mongoose
-			.connect(process.env.DB_URI, {
+			.connect(process.env.MONGO_URI, {
 				useNewUrlParser: true,
 				useCreateIndex: true,
 			})
