@@ -6,7 +6,7 @@ import styled from "styled-components";
 export default function Footer({ menu = [] }: { menu?: [any] | [] }) {
 	return (
 		<Root>
-			Copyright © 2020 {/* {config.title} */} -{" "}
+			Copyright © 2021 HackintoshPro {/* {config.title} */}{" "}
 			{(menu as [any]).map((menuItem) => (
 				<span key={menuItem.id}>
 					<Link href={menuItem.url}>{menuItem.title} </Link>

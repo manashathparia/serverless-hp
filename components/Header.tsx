@@ -18,7 +18,7 @@ export default function Header({ menu = [] }: { menu?: [MenuItem] | [] }) {
 					href="/"
 				>
 					<span style={{ cursor: "pointer" }} className={`navbar-item logo`}>
-						<Logo />
+						<Logo /> BETA
 					</span>
 				</Link>
 				<NavbarBurger className="navbar-burger" onClick={toggleMenu}>
