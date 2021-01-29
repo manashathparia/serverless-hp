@@ -16,7 +16,7 @@ export interface MenuItem {
 }
 
 interface MenuProps {
-	menu: [MenuItem];
+	menu: [MenuItem] | [];
 	mobile?: boolean;
 	show?: boolean;
 	toggleMenu?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
@@ -88,6 +88,7 @@ export const Span = styled.span`
 	font-size: 1.4rem;
 	font-weight: 400;
 	color: ${({ theme }) => theme.color};
+	cursor: pointer;
 	:hover {
 		color: ${({ theme }) => theme.color};
 	}

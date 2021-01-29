@@ -15,10 +15,10 @@ const postPage = () => {
 	return (
 		<Layout>
 			<Article
-				featuredImage={post.featuredImages?.large}
-				article={post.content}
-				title={post.title}
-				date={post.modified}
+				featuredImage={post?.featuredImages?.large}
+				article={post?.content}
+				title={post?.title}
+				date={post?.modified}
 			/>
 		</Layout>
 	);

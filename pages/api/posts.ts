@@ -6,7 +6,7 @@ export default async function handler(req: any, res: any) {
 	const PostModel = mongoose.model("Post");
 
 	if (req.method === "GET") {
-		const posts = await PostModel.find({});
+		const posts = await PostModel.find({}).populate("comments");
 		res.json(posts);
 	}
 }

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 // require models
 import "./models/post.model";
 import "./models/category.model";
+import "./models/comments.model";
 
 export function modelAreadyDeclared(model: string) {
 	try {

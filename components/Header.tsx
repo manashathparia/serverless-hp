@@ -15,9 +15,9 @@ export default function Header({ menu = [] }: { menu?: [MenuItem] | [] }) {
 			<div style={{ margin: "auto" }} className="navbar-brand">
 				<Link
 					// style={{ zIndex: 99 }}
-					href="/jjj"
+					href="/"
 				>
-					<span className={`navbar-item logo`}>
+					<span style={{ cursor: "pointer" }} className={`navbar-item logo`}>
 						<Logo />
 					</span>
 				</Link>
