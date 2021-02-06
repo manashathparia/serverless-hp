@@ -1,17 +1,14 @@
 import React from "react";
 import App, { AppInitialProps } from "next/app";
-import { ThemeProvider } from "styled-components";
+import ThemeProvider from "../components/ThemeProvider";
 import Global from "../global";
 import { wrapper } from "../redux/Reducers";
-import { dark } from "../theme";
 
-class MyApp extends App<AppInitialProps> {
+class MyApp extends App<AppInitialProps, any, { dark: boolean }> {
 	public render() {
 		const { Component, pageProps } = this.props;
-		// const isDark = window && window.matchMedia("(prefers-color-scheme: dark)");
-
 		return (
-			<ThemeProvider theme={dark}>
+			<ThemeProvider>
 				<Global />
 				<Component {...pageProps} />
 			</ThemeProvider>

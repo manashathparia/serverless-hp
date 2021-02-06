@@ -1,4 +1,14 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
+
+declare module "styled-components" {
+	export interface DefaultTheme {
+		borderRadius?: string;
+		color?: string;
+		primary?: string;
+		border?: string;
+		secondary?: string;
+	}
+}
 
 export default createGlobalStyle`
 .media-content *, .comment-form *, .card-heading,  .input, .col, strong{

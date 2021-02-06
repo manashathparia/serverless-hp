@@ -2,9 +2,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-// import { toggleDarkMode } from '../../Actions/preferences.actions';
+import { toggleDarkMode } from "../../redux/Actions/preferences.actions";
 
-function DarkModeToggle({ /* toggle, */ dark }: any) {
+function DarkModeToggle({ toggle, dark }: any) {
 	return (
 		<Root className="toggle">
 			<Icon aria-label="img" role="img">
@@ -12,7 +12,7 @@ function DarkModeToggle({ /* toggle, */ dark }: any) {
 			</Icon>
 			<CheckBox
 				type="checkbox"
-				// onChange={toggle}
+				onChange={toggle}
 				checked={dark}
 				id="toggle-switch"
 			/>
@@ -92,10 +92,11 @@ const Icon = styled.span`
 	}
 `;
 
-export default connect()(DarkModeToggle);
-// ({ preferences }) => ({ dark: preferences.darkMode }),
-// (/* dispatch */) => ({
-//     toggle() {
-//         // dispatch(toggleDarkMode());
-//     },
-// })
+export default connect(
+	({ preferences }: any) => ({ dark: preferences.darkMode }),
+	(dispatch) => ({
+		toggle() {
+			dispatch(toggleDarkMode());
+		},
+	})
+)(DarkModeToggle);
