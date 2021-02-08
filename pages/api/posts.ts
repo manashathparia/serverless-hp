@@ -1,12 +1,8 @@
-import mongoose from "mongoose";
-import connectDb from "../../mongo";
+import { getPosts } from "../../apiHandlers/posts";
 
 export default async function handler(req: any, res: any) {
-	await connectDb();
-	const PostModel = mongoose.model("Post");
-
 	if (req.method === "GET") {
-		const posts = await PostModel.find({}).populate("comments");
+		const posts = await getPosts();
 		res.json(posts);
 	}
 }

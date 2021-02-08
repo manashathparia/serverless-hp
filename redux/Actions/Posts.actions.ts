@@ -44,13 +44,13 @@ export const getWpPostAction = (_post: PostType) => {
 };
 
 export const updateTotalPageAction = (
-	totalPosts: string,
-	totalPages: string
+	totalPosts: number,
+	totalPages: number
 ) => ({
 	type: UPDATE_TOTAL_POSTS,
 	payload: {
-		total_pages: Number.parseInt(totalPages, 10),
-		total_posts: Number.parseInt(totalPosts, 10),
+		total_pages: totalPages,
+		total_posts: totalPosts,
 	},
 });
 

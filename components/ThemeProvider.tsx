@@ -6,10 +6,14 @@ import { toggleDarkMode } from "../redux/Actions/preferences.actions";
 
 export default function _ThemeProvider({ children }: any) {
 	const dispatch = useDispatch();
+	const darkModeRan = useSelector(
+		({ preferences }: any) => preferences.darkModeRan
+	);
+
 	useEffect(() => {
 		const isSysDark =
 			window && window.matchMedia("(prefers-color-scheme: dark)").matches;
-		if (isSysDark) {
+		if (isSysDark && !darkModeRan) {
 			dispatch(toggleDarkMode());
 		}
 	}, []);

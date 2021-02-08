@@ -12,7 +12,7 @@ const initial = {
 export default function (state = initial, { type }: { type: string }) {
 	switch (type) {
 		case TOGGLE_DARK_MODE:
-			return { ...state, darkMode: !state.darkMode };
+			return { ...state, darkMode: !state.darkMode, darkModeRan: true };
 
 		case DARK_MODE_RAN:
 			return { ...state, darkModeRan: true };

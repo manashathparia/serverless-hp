@@ -1,15 +1,19 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getPosts } from "../apiHandlers/posts";
 import Card from "../components/Card";
 import Layout from "../components/Layout";
-import { getWpAllPosts } from "../redux/Actions/Posts.actions";
+import LoadMore from "../components/micro-components/LoadMore";
+import {
+	getAllPostsAction,
+	updateTotalPageAction,
+} from "../redux/Actions/Posts.actions";
 
-const IndexPage = () => {
+const IndexPage = ({ posts, totalPosts }: any) => {
 	const dispatch = useDispatch();
-	const posts = useSelector((state: any) => state.posts.all_posts);
-	console.log(posts);
 	useEffect(() => {
-		dispatch(getWpAllPosts(0));
+		dispatch(getAllPostsAction(posts));
+		dispatch(updateTotalPageAction(totalPosts, 0));
 	}, []);
 	return (
 		<Layout>
@@ -26,8 +30,24 @@ const IndexPage = () => {
 					// updatePostID={updatePostID}
 				/>
 			))}
+			<LoadMore total={totalPosts} />
 		</Layout>
 	);
+};
+
+export const getStaticProps = async () => {
+	let posts: any = await getPosts({
+		only: ["title", "excerpt", "modified", "slug", "featuredImages"],
+		page: 0,
+	});
+	const totalPosts = JSON.parse(JSON.stringify(posts[1]));
+	posts = JSON.parse(JSON.stringify(posts[0])); //https://github.com/vercel/next.js/issues/11993#issuecomment-617375501
+	return {
+		props: {
+			posts,
+			totalPosts,
+		},
+	};
 };
 
 export default IndexPage;

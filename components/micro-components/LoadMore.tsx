@@ -6,7 +6,7 @@ import RoundedButton from "./Rounded-button";
 export default function LoadMore({ onClick, loading, total }: any) {
 	const [pageNo, changePage] = useState(2);
 
-	const postsAvailable = total === pageNo;
+	const postsAvailable = total / 10 > pageNo;
 
 	const call = () => {
 		if (postsAvailable) {

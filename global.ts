@@ -7,6 +7,7 @@ declare module "styled-components" {
 		primary?: string;
 		border?: string;
 		secondary?: string;
+		boxShadow?: string;
 	}
 }
 
