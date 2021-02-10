@@ -4,7 +4,7 @@ import {
 } from "../Actions/preferences.actions";
 
 const initial = {
-	darkMode: false,
+	darkMode: true,
 	darkModeRan: false,
 	cdn: "",
 };
