@@ -1,20 +1,31 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../apiHandlers/posts";
 import Card from "../components/Card";
 import Layout from "../components/Layout";
 import LoadMore from "../components/micro-components/LoadMore";
 import {
 	getAllPostsAction,
+	getWpAllPosts,
 	updateTotalPageAction,
 } from "../redux/Actions/Posts.actions";
+import { wrapper } from "../redux/Reducers";
 
-const IndexPage = ({ posts, totalPosts }: any) => {
+const IndexPage = () => {
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getAllPostsAction(posts));
-		dispatch(updateTotalPageAction(totalPosts, 0));
-	}, []);
+	const { all_posts: posts, total_posts } = useSelector(
+		(state: any) => state.posts
+	);
+	function loadMorePosts(page: number) {
+		dispatch(
+			getWpAllPosts(page, [
+				"title",
+				"featuredImages",
+				"slug",
+				"excerpt",
+				"modified",
+			])
+		);
+	}
 	return (
 		<Layout>
 			{posts.map((post: any) => (
@@ -30,24 +41,20 @@ const IndexPage = ({ posts, totalPosts }: any) => {
 					// updatePostID={updatePostID}
 				/>
 			))}
-			<LoadMore total={totalPosts} />
+			<LoadMore total={total_posts} onClick={loadMorePosts} />
 		</Layout>
 	);
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps = wrapper.getStaticProps(async ({ store }: any) => {
 	let posts: any = await getPosts({
-		only: ["title", "excerpt", "modified", "slug", "featuredImages"],
-		page: 0,
+		fields: ["title", "excerpt", "modified", "slug", "featuredImages"],
+		page: 1,
 	});
 	const totalPosts = JSON.parse(JSON.stringify(posts[1]));
 	posts = JSON.parse(JSON.stringify(posts[0])); //https://github.com/vercel/next.js/issues/11993#issuecomment-617375501
-	return {
-		props: {
-			posts,
-			totalPosts,
-		},
-	};
-};
+	store.dispatch(getAllPostsAction(posts));
+	store.dispatch(updateTotalPageAction(totalPosts, 0));
+});
 
 export default IndexPage;

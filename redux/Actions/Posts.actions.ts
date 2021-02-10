@@ -59,15 +59,17 @@ export const clearCurrentPost = () => ({
 	payload: {},
 });
 
-export const getWpAllPosts = (_pageNo: number) => async (
+export const getWpAllPosts = (pageNo: number, fields: string[]) => async (
 	dispatch: Function
 ) => {
 	try {
 		dispatch(showLoading());
-		const _posts = await axios.get(`/api/posts`);
+		const _posts = await axios.get(
+			`/api/posts?fields=${fields}&page=${pageNo}`
+		);
 		dispatch(hideLoading());
 		console.log(_posts);
-		dispatch(getAllPostsAction(_posts.data));
+		dispatch(getAllPostsAction(_posts.data[0]));
 
 		// dispatch(
 		// 	updateTotalPageAction(
