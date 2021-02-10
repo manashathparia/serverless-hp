@@ -11,9 +11,9 @@ export default function _ThemeProvider({ children }: any) {
 	);
 
 	useEffect(() => {
-		const isSysDark =
-			window && window.matchMedia("(prefers-color-scheme: dark)").matches;
-		if (isSysDark && !darkModeRan) {
+		const isSysLight =
+			window && window.matchMedia("(prefers-color-scheme: light)").matches;
+		if (isSysLight && !darkModeRan) {
 			dispatch(toggleDarkMode());
 		}
 	}, []);
