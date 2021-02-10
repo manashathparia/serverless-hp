@@ -23,10 +23,12 @@ export default function Card(props: CardProps) {
 			>
 				<Heading className="card-heading">
 					<Link
-						href={{
-							pathname: `/${props.slug}`,
-							// state: { id: props.id },
-						}}
+						href="/[slug]" as={`/${props.slug}`} shallow={false}
+						
+						
+							
+
+						
 					>
 						<span dangerouslySetInnerHTML={{ __html: props.title }} />
 					</Link>
