@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { getPosts } from "../apiHandlers/posts";
 import Article from "../components/Article";
@@ -6,8 +6,8 @@ import Layout from "../components/Layout";
 import { wrapper } from "../redux/Reducers";
 
 const postPage = (post: any = {}) => {
-	const router = useRouter();
-	const { slug } = router.query;
+	// const router = useRouter();
+	// const { slug } = router.query;
 
 	const { all_posts: posts } = useSelector((state: any) => state.posts);
 	console.log(posts);
