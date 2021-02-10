@@ -1,18 +1,26 @@
-// import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import { getPosts } from "../apiHandlers/posts";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { getPostBySlug, getPosts } from "../apiHandlers/posts";
 import Article from "../components/Article";
 import Layout from "../components/Layout";
-import { wrapper } from "../redux/Reducers";
+import { getWpPost } from "../redux/Actions/Posts.actions";
 
-const postPage = (post: any = {}) => {
-	// const router = useRouter();
-	// const { slug } = router.query;
+const postPage = (post: any) => {
+	const router = useRouter();
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if (!post) {
+			const { slug } = router.query;
+			dispatch(getWpPost(slug as string));
+		}
+	});
 
-	const { all_posts: posts } = useSelector((state: any) => state.posts);
-	console.log(posts);
+	const { current_post } = useSelector((state: any) => state.posts);
+	if (!post) {
+		post = current_post;
+	}
 	// const [post] = posts.filter((post: any) => post.slug === slug);
-	console.log(post);
 
 	return (
 		<Layout>
@@ -26,7 +34,14 @@ const postPage = (post: any = {}) => {
 	);
 };
 
-export const getStaticProps = wrapper.getStaticProps(async () => {});
+export const getStaticProps = async (args: any) => {
+	const slug = args.params.slug;
+	let post = await getPostBySlug(slug);
+	post = JSON.parse(JSON.stringify(post[0]));
+	return {
+		props: post,
+	};
+};
 export const getStaticPaths = async () => {
 	const postsSlugs = await getPosts({ fields: ["slug"], noLimit: true });
 	const paths = Array.isArray(postsSlugs[0])

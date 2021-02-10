@@ -106,7 +106,7 @@ export const getWpPost = (slug: string) => async (
 		dispatch(showLoading());
 		const {
 			data: [post],
-		} = await axios.get(`/posts/?slug=${slug}`);
+		} = await axios.get(`api/posts/?slug=${slug}`);
 
 		dispatch(hideLoading());
 		if (!post) {
