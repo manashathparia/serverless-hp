@@ -18,18 +18,32 @@ export default function Header({ menu = [] }: { menu?: [MenuItem] | [] }) {
 					href="/"
 				>
 					<span style={{ cursor: "pointer" }} className={`navbar-item logo`}>
-						<Logo /> BETA
+						<Logo /> ALPHA
 					</span>
 				</Link>
-				<NavbarBurger className="navbar-burger" onClick={toggleMenu}>
+				{/* <NavbarBurger className="navbar-burger" onClick={toggleMenu}>
 					<div>{menuOpen ? <CloseIcon /> : <Burger />}</div>
-				</NavbarBurger>
+				</NavbarBurger> */}
+				<label className="wrapper-menu" htmlFor="check">
+					<input
+						className="hamInput"
+						onChange={toggleMenu}
+						id="check"
+						type="checkbox"
+					></input>
+					<div className="hamContainer">
+						<div className="line-menu half start"></div>
+						<div className="line-menu middle"></div>
+						<div className="line-menu half end"></div>
+					</div>
+				</label>
 			</div>
 			<LoadingBar
 				updateTime={300}
 				maxProgress={90}
 				progressIncrease={5}
 				className="loading"
+				style={{ left: 0, right: 0 }}
 			/>
 		</nav>
 	);

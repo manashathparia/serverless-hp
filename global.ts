@@ -95,6 +95,63 @@ pre {
 	margin-bottom: 15px;
 }
 
+
+.hamContainer {
+  width: 35px;
+  height: 33px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 330ms ease-out;
+}
+
+.wrapper-menu {
+  height: 100%;
+	z-index: 999999;
+	-webkit-transform: translate(2em, 1.1em);
+	transform: translate(1.5em, 1.1em);
+		-webkit-tap-highlight-color: transparent;
+
+}
+.hamInput[type="checkbox"]:checked ~ .hamContainer{
+  transform: rotate(-45deg);  
+}
+
+.line-menu {
+  background-color: ${({ theme }) => theme.color};
+  border-radius: 5px;
+  width: 100%;
+  height: 4px;
+}
+
+.line-menu.half {
+  width: 50%;
+}
+
+.line-menu.start {
+  transition: transform 230ms cubic-bezier(0.54, -0.81, 0.57, 0.57);
+  transform-origin: right;
+}
+
+.hamInput[type="checkbox"]:checked ~ .hamContainer .line-menu.start {
+  transform: rotate(-90deg) translateX(3px);
+}
+
+.line-menu.end {
+  align-self: flex-end;
+  transition: transform 230ms cubic-bezier(0.54, -0.81, 0.57, 0.57);
+  transform-origin: left;
+}
+
+.hamInput[type="checkbox"]:checked ~ .hamContainer .line-menu.end {
+  transform: rotate(-90deg) translateX(-3px);
+}
+
+.hamInput{
+  display: none;
+}
+
 .navbar {
     background: ${({ theme }) => theme.primary};
 	border-bottom: 1px solid ${({ theme }) => theme.border};
@@ -202,6 +259,5 @@ pre {
 		border: 2px solid #353941 !important;
 		color: ${({ theme }) => theme.color} !important;
 	}
-
 
 `;

@@ -24,6 +24,7 @@ export default function LoadMore({ onClick, loading, total }: any) {
 				height={35}
 				disabled={!postsAvailable}
 				onClick={call}
+				style={{ position: "absolute", margin: "auto", left: 0, right: 0 }}
 			>
 				{postsAvailable ? (
 					<React.Fragment>

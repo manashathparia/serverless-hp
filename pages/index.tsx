@@ -41,7 +41,9 @@ const IndexPage = () => {
 					// updatePostID={updatePostID}
 				/>
 			))}
-			<LoadMore total={total_posts} onClick={loadMorePosts} />
+			<div style={{ height: 35 }}>
+				<LoadMore total={total_posts} onClick={loadMorePosts} />
+			</div>
 		</Layout>
 	);
 };
