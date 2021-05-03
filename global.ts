@@ -222,6 +222,9 @@ pre {
 }
 
 @media only screen and (min-width: 1024px) {
+	.wrapper-menu{
+		display: none
+	}
 	.expert-container {
 		padding-left: 0;
     }
