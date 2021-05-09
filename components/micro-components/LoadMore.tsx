@@ -17,7 +17,15 @@ export default function LoadMore({ onClick, loading, total }: any) {
 
 	if (total > 1) {
 		return loading ? (
-			<Loader style={{ height: "30px" }} />
+			<Loader
+				style={{
+					height: "30px",
+					position: "absolute",
+					margin: "auto",
+					left: 0,
+					right: 0,
+				}}
+			/>
 		) : (
 			<RoundedButton
 				width={150}

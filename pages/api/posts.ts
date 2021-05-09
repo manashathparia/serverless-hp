@@ -1,4 +1,4 @@
-import { getPostBySlug, getPosts } from "../../apiHandlers/posts";
+import { getPostBySlug, getPosts, updatePost } from "../../apiHandlers/posts";
 
 export default async function handler(req: any, res: any) {
 	if (req.method === "GET") {
@@ -9,5 +9,24 @@ export default async function handler(req: any, res: any) {
 		}
 		const posts = await getPosts({ fields: fields.split(","), page });
 		res.json(posts);
+	}
+
+	if (req.method === "PUT") {
+		const { id } = req.query;
+		let body = req.body;
+
+		if (body) {
+			body = JSON.parse(body);
+		}
+
+		if (!id) {
+			res.send("Invalid request");
+		}
+		try {
+			const res_ = await updatePost({ id, body });
+			res.json(res_);
+		} catch (e) {
+			res.send(e);
+		}
 	}
 }

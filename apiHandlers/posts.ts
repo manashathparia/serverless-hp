@@ -23,11 +23,25 @@ export const getPosts = async function (
 	const posts = await PostModel.find({}, [...args.fields])
 		.skip((args.page - 1) * postPerPage)
 		.limit(args.noLimit ? null : postPerPage)
+		.populate("categories")
 		.populate(args.comments ? "comments" : null)
 		.exec();
 
 	const docLength = await PostModel.countDocuments();
 	return [posts, docLength];
+};
+
+export const getPostsByCategory = async (category: string) => {
+	await connectDb();
+	const postModel = mongoose.model("Post");
+	const categoryModel = mongoose.model("Category");
+
+	const category_: any = await categoryModel.find({ slug: category });
+	const posts = await postModel.find({
+		categories: { $in: [category_[0]["_id"]] },
+	});
+
+	return posts;
 };
 
 export const getPostBySlug = async (slug: string) => {
@@ -36,4 +50,27 @@ export const getPostBySlug = async (slug: string) => {
 
 	const post = await PostModel.find({ slug }).populate("comments");
 	return post;
+};
+
+export const updatePost = async ({ id, body }: any) => {
+	await connectDb();
+	const PostModel = mongoose.model("Post");
+	if (mongoose.Types.ObjectId.isValid(id)) {
+		try {
+			const post = await PostModel.findById(id);
+			if (post) {
+				await PostModel.update({ _id: post._id }, body);
+				return {
+					_id: id,
+				};
+			} else {
+				throw Error(`Post with id ${id} not found`);
+			}
+		} catch (e) {
+			console.error(e);
+			throw Error("Error while updating the Post into Database");
+		}
+	} else {
+		throw Error(`Invalid object ID: ${id}`);
+	}
 };

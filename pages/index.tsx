@@ -12,9 +12,10 @@ import { wrapper } from "../redux/Reducers";
 
 const IndexPage = () => {
 	const dispatch = useDispatch();
-	const { all_posts: posts, total_posts } = useSelector(
-		(state: any) => state.posts
-	);
+	const {
+		posts: { all_posts: posts, total_posts },
+		loadingBar: { default: loading },
+	} = useSelector((state: any) => state);
 	function loadMorePosts(page: number) {
 		dispatch(
 			getWpAllPosts(page, [
@@ -41,8 +42,12 @@ const IndexPage = () => {
 					// updatePostID={updatePostID}
 				/>
 			))}
-			<div style={{ height: 35 }}>
-				<LoadMore total={total_posts} onClick={loadMorePosts} />
+			<div style={{ height: 35, position: "relative" }}>
+				<LoadMore
+					loading={loading}
+					total={total_posts}
+					onClick={loadMorePosts}
+				/>
 			</div>
 		</Layout>
 	);

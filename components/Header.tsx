@@ -33,7 +33,6 @@ export default function Header({ menu = [] }: { menu?: [MenuItem] | [] }) {
 					>
 						&#9432;
 					</span>{" "}
-					;
 				</span>
 				<label className="wrapper-menu" htmlFor="check">
 					<input
