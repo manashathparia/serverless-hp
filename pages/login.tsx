@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import Layout from "../components/Layout";
 export const Login = () => {
-	useEffect(() => {
-		const username = prompt("Username");
-		const password = prompt("Password");
-	}, []);
+	useEffect(() => {}, []);
 	return (
 		<Layout>
 			<div>Loging you in</div>
