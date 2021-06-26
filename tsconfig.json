@@ -32,6 +32,7 @@
 		"redux/store.js",
 		"components/Notification.js",
 		"components/widgets/versionSelector.js",
-		"components/AdminTools.js"
+		"components/AdminTools.js",
+		"utils/commentSorter.js"
 	]
 }

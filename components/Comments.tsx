@@ -149,20 +149,20 @@ const CommentForm = ({
 
 interface CommentProps {
 	children: JSX.Element;
-	comment_author: string;
-	comment_ID: number;
-	comment_content: string;
-	comment_date: string;
+	authorName: string;
+	_id: string;
+	content: string;
+	date: string;
 	toggle: Function;
 	comment_depth: number;
 }
 
 const Comment = ({
 	children,
-	comment_author: name,
-	comment_ID: id,
-	comment_content: content,
-	comment_date: date,
+	authorName: name,
+	_id: id,
+	content: content,
+	date: date,
 	toggle,
 	comment_depth,
 }: CommentProps) => (
@@ -190,7 +190,6 @@ const Comment = ({
 						</small>
 					)}
 					<br />
-					<span dangerouslySetInnerHTML={{ __html: content }} />
 					<br />
 				</p>
 			</div>
@@ -201,9 +200,9 @@ const Comment = ({
 
 const renderComments = (arr: Array<any>, Component: any, toggle: Function) =>
 	arr?.map((comment) => (
-		<Component key={comment.comment_ID} {...comment} toggle={toggle}>
-			{comment?.comment_children.length > 0
-				? renderComments(comment.comment_children, Component, toggle)
+		<Component key={comment._id} {...comment} toggle={toggle}>
+			{comment?.children?.length > 0
+				? renderComments(comment.children, Component, toggle)
 				: null}
 		</Component>
 	));

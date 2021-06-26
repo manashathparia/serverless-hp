@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import connectDb from "../mongo";
+import SortComments from "../utils/commentSorter";
 
 interface GetPostsArgs {
 	fields?: string[] | [];
@@ -24,7 +25,7 @@ export const getPosts = async function (
 		.skip((args.page - 1) * postPerPage)
 		.limit(args.noLimit ? null : postPerPage)
 		.populate("categories")
-		.populate(args.comments ? "comments" : null)
+		.populate(args.comments ? "comment" : null)
 		.exec();
 
 	const docLength = await PostModel.countDocuments();
@@ -36,9 +37,9 @@ export const getPostsByCategory = async (category: string) => {
 	const postModel = mongoose.model("Post");
 	const categoryModel = mongoose.model("Category");
 
-	const category_: any = await categoryModel.find({ slug: category });
+	const [category_]: any = await categoryModel.find({ slug: category });
 	const posts = await postModel.find({
-		categories: { $in: [category_[0]["_id"]] },
+		categories: { $in: [category_["_id"]] },
 	});
 
 	return posts;
@@ -48,7 +49,7 @@ export const getPostBySlug = async (slug: string) => {
 	await connectDb();
 	const PostModel = mongoose.model("Post");
 
-	const post = await PostModel.find({ slug }).populate("comments");
+	const post: any = await PostModel.find({ slug }).populate("comments");
 	return post;
 };
 

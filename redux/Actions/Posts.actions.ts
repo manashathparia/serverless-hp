@@ -2,7 +2,7 @@
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 // import { push } from 'connected-react-router';
 import axios from "axios";
-// import { sortComments } from '../utils/wordpress';
+import sortComments from "../../utils/commentSorter";
 import { addNotification } from "./notification.actions";
 import { PostType } from "../../mongo/models/post.model";
 // import config from '../../config.json';
@@ -58,6 +58,10 @@ export const clearCurrentPost = () => ({
 	type: UPDATE_POST,
 	payload: {},
 });
+export const updateCurrentPost = (post: PostType) => ({
+	type: UPDATE_POST,
+	payload: post,
+});
 
 export const getWpAllPosts = (pageNo: number, fields: string[]) => async (
 	dispatch: Function
@@ -107,6 +111,9 @@ export const getWpPost = (slug: string) => async (
 		const {
 			data: [post],
 		} = await axios.get(`api/posts/?slug=${slug}`);
+
+		post.comments = sortComments.arrangeComments(post.comments);
+		console.log(sortComments.arrangeComments(post.comments), 1);
 
 		dispatch(hideLoading());
 		if (!post) {
