@@ -1,5 +1,6 @@
 import { getPostsByCategory } from "../../apiHandlers/posts";
 import { wrapper } from "../../redux/Reducers";
+import { getAllPostsAction } from "../../redux/Actions/Posts.actions";
 
 export default function CategoryPage() {
 	return <div></div>;

@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import connectDb from "../mongo";
-import SortComments from "../utils/commentSorter";
 
 interface GetPostsArgs {
 	fields?: string[] | [];

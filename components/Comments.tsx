@@ -190,6 +190,7 @@ const Comment = ({
 						</small>
 					)}
 					<br />
+					<span dangerouslySetInnerHTML={{ __html: content }} />
 					<br />
 				</p>
 			</div>
